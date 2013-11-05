@@ -1,12 +1,15 @@
 package br.com.algartecnologia.e1.crawler.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
- *
+ * 
  * @author <a href="mailto:pviniciusfm@gmail.com">Paulo Vinicius F. Machado</a>
  */
 public class TimesheetJobConfiguration {
@@ -14,8 +17,17 @@ public class TimesheetJobConfiguration {
     public Map<FilaDemanda, List<String>> tarefas;
 
     public TimesheetJobConfiguration() {
-        this.tarefas = new EnumMap<FilaDemanda,List<String>>(FilaDemanda.class);
+        initTarefas();
         createDefault();
+    }
+
+    private void initTarefas(){
+        this.tarefas = new EnumMap<FilaDemanda, List<String>>(FilaDemanda.class);
+    }
+
+    public TimesheetJobConfiguration(JSONObject obj) {
+        initTarefas();
+        parseJSONObject(obj);
     }
 
     private void preparaTarefas() {
@@ -26,7 +38,7 @@ public class TimesheetJobConfiguration {
 
     private void createDefault() {
         preparaTarefas();
-        
+
         List<String> filaRequisitos = tarefas.get(FilaDemanda.REQUISITOS);
         filaRequisitos.add("Requisitos / OS %s");
         filaRequisitos.add("Correção de bugs de Requisitos / OS %s");
@@ -51,6 +63,24 @@ public class TimesheetJobConfiguration {
         filaHomolog.add("Apoio à equipe / OS %s");
         filaHomolog.add("Preparação de ambiente de testes / OS %s");
         filaHomolog.add("Análise e entendimento de OS %s");
+    }
+
+    private void parseJSONObject(JSONObject obj) {
+        for (FilaDemanda demanda : FilaDemanda.values()) {
+            if (obj.containsKey(demanda.getJsonKey())) {
+                this.tarefas.put(demanda, transformJsonArrayIntoList((JSONArray) obj.get(demanda.getJsonKey())));
+            } else {
+                this.tarefas.put(demanda, Collections.EMPTY_LIST);
+            }
+        }        
+    }
+
+    private static List<String> transformJsonArrayIntoList(JSONArray array) {
+        List<String> result = new ArrayList<String>();
+        for (int i = 0; i < array.size(); i++) {
+            result.add((String)array.get(i));
+        }
+        return result;
     }
 
 }

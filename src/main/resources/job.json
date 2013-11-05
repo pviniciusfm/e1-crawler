@@ -1,0 +1,34 @@
+{
+    "login": "gustavohlf",
+    "senha": "algar123",
+    "customer": "Empresa1",
+    "project": "BHZ13F001-Vortex",
+    "requisitos": [0, 1, 2, 3, 4],
+    "homologacao": [5, 6, 7, 8, 9, 10],
+    "desenvolvimento": [11, 12, 13, 14, 15],
+    "config": {
+        "requisitos": ["Requisitos / OS %s",
+            "Correção de bugs de Requisitos / OS %s"],
+        "desenvolvimento": ["Apoio ao desenvolvimento / OS %s",
+            "Apoio ao teste / OS %s",
+            "Reunião para alinhamento técnico com o cliente / OS %s",
+            "Especificação técnica / OS %s",
+            "Laudo de realização especial / OS %s",
+            "Necessidade de alteração de escopo / OS %s",
+            "Implementação da demanda / OS %s",
+            "Liberação de demanda Desenvolvimento / OS %s",
+            "Correção de bugs de software / OS %s",
+            "Preparação e configuração de ambiente de desenvolvimento / OS %s"],
+        "homologacao": [
+            "Homologação de demanda / OS %s",
+            "Inclusão/Alteração de casos de teste / OS %s",
+            "Abertura/Fechamento de bugs / OS %s",
+            "Liberação de demanda Homologação / OS %s",
+            "Apoio à equipe / OS %s",
+            "Preparação de ambiente de testes / OS %s",
+            "Análise e entendimento de OS %s"]
+    }
+}
+
+
+

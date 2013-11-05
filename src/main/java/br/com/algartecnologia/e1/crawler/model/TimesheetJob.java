@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class TimesheetJob {
 
-    private final TimesheetJobConfiguration config = new TimesheetJobConfiguration();
+    private TimesheetJobConfiguration config;
     private String login;
     private String senha;
     private String customer;
@@ -108,6 +108,12 @@ public class TimesheetJob {
         this.project = (String) obj.get("project");
 
         checkNull(this.login, this.senha, this.customer, this.project);
+
+        if (obj.containsKey("config")){
+            this.config = new TimesheetJobConfiguration((JSONObject) obj.get("config"));
+        }else{
+            this.config = new TimesheetJobConfiguration();
+        }
 
         parseFilaDemandas(obj);
     }
